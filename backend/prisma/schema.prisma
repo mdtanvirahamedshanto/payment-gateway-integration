@@ -1,0 +1,70 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// User Model
+model User {
+  id        String    @id @default(cuid()) // Unique user ID
+  name      String
+  email     String    @unique
+  password  String    // Hashed password
+  role      String    @default("User") // Roles can be 'User', 'Admin', etc.
+  orders    Order[]   // Relation to orders
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+// Order Model
+model Order {
+  id            String           @id @default(cuid())
+  userId        String           // Foreign key for the user
+  user          User             @relation(fields: [userId], references: [id])
+  items         String           // JSON or a stringified array for order details
+  status        OrderStatus      @default(PENDING)
+  payment       Payments?  // Optional one-to-one relationship
+  totalAmount   Float
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+// Payment History Model
+model Payments {
+  id            String      @id @default(cuid())
+  orderId       String      @unique // Mark as unique to ensure one-to-one relation
+  order         Order       @relation(fields: [orderId], references: [id])
+  amount        Float
+  paymentMethod PaymentMethod // Enum for payment methods
+  status        PaymentStatus  // Enum for payment statuses
+  transactionId String
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
+
+// Enums for Payment
+enum PaymentMethod {
+  CREDIT_CARD
+  SSL_COMMERZ
+  AAMARPAY
+  SHURJOPAY
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+// Enums for Order
+enum OrderStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
