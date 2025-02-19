@@ -1,3 +1,3 @@
-export const countries = ["United States", "Canada", "India", "Australia", "United Kingdom"];
-    export const regions = ["California", "Ontario", "Maharashtra", "New South Wales", "England"];
-    export const cities = ["Los Angeles", "Toronto", "Mumbai", "Sydney", "London"];
+export const countries = ["Bangladesh"];
+    export const regions = ["Barishal", "Dhaka", "Rajshahi", "Sylhet", "Chittagong"];
+    export const cities = ["Patuakhali", "Brahmanbaria", "Chandpur", "Mymensingh", "Natore", "Nawabganj","Barishal", "Dhaka", "Rajshahi", "Sylhet", "Chittagong"];

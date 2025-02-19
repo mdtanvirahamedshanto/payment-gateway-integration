@@ -6,6 +6,7 @@ import Footer from "./components/common/Footer";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Page404 from "./components/common/Page404";
+import CheckoutPage from "./pages/CheckoutPage";
 function App() {
   return (
     <BrowserRouter>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Signin />} />
         <Route path="/register" element={<Signup />} />
+        <Route path="/checkout/:id" element={<CheckoutPage />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
       <Footer />
