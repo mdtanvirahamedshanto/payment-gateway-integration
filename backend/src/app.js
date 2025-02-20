@@ -1,25 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const userRoutes = require('./routes/userRoutes');
-
 const app = express();
+const router = require('./routes/v1/user.routes')
 
 // Middleware
 app.use(bodyParser.json()); // For parsing application/json
 
 // Routes
 // User Route
-app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/users', router);
 
 // Payments Routes
 // SSLCommerz
-app.use('/api/v1/payments', require('./routes/paymentRoutes'));
+// app.use('/api/v1/payments', require('./routes/paymentRoutes'));
 
-// AamarPay
-app.use('/api/v2/payments', require('./routes/aamarpayRoutes'));
+// // AamarPay
+// app.use('/api/v2/payments', require('./routes/aamarpayRoutes'));
 
-// shurjopay
-app.use('/api/v3/payments', require('./routes/shurjopayRoutes'));
+// // shurjopay
+// app.use('/api/v3/payments', require('./routes/shurjopayRoutes'));
 
 // 404 Error Handling
 app.use((req, res, next) => {
